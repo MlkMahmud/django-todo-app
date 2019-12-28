@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% load static %}
   <link rel="stylesheet" href="{% static "tasks/styles.css" %}" />
-  <title>ToDo List</title>
+  <title>Todo List</title>
 </head>
 <body>
   <div class="container">
@@ -15,7 +15,14 @@
       <input type="submit" value="&#x2b;" name="new task" />
     </form>
     <ul class="tasks"> 
-      
+      {% for todo in todos %}
+        <li class="task">
+          <span>{{ todo.task }}</span>
+          <form method="POST" action="{% url 'detail' todo.id %}"> {% csrf_token %}
+            <button type="submit">X</button>
+          </form>
+        </li>
+      {% endfor %}
     </ul>
   </div>
 </body>
